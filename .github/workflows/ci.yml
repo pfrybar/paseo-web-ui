@@ -31,7 +31,7 @@ jobs:
         run: shellcheck tests/image.sh
 
       - name: Caddyfile is formatted
-        run: docker run --rm -v "$PWD/Caddyfile:/Caddyfile:ro" caddy:2.10.2-alpine caddy fmt --diff /Caddyfile
+        run: docker run --rm -v "$PWD/Caddyfile:/Caddyfile:ro" caddy:2.11.7-alpine caddy fmt --diff /Caddyfile
 
   image:
     name: Build, test and publish

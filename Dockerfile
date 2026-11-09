@@ -5,7 +5,7 @@
 # version your daemons run.
 
 ARG PASEO_VERSION=0.15.3
-ARG CADDY_VERSION=2.10.2
+ARG CADDY_VERSION=2.11.7
 
 # Runs on the build machine's own architecture: it only downloads and unpacks
 # files, which are the same for every platform.

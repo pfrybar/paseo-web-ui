@@ -20,7 +20,7 @@ using the image.
 docker build -t paseo-web-ui:test .
 tests/image.sh
 docker run --rm -v "$PWD:/mnt:ro" -w /mnt koalaman/shellcheck:v0.10.0 tests/image.sh
-docker run --rm -v "$PWD/Caddyfile:/Caddyfile:ro" caddy:2.10.2-alpine caddy fmt --diff /Caddyfile
+docker run --rm -v "$PWD/Caddyfile:/Caddyfile:ro" caddy:2.11.7-alpine caddy fmt --diff /Caddyfile
 ```
 
 Add a check to `tests/image.sh` for new behavior.

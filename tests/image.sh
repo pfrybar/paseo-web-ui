@@ -47,6 +47,9 @@ check "healthz answers" bash -c "[[ \$(curl -fs '$base/healthz') == ok ]]"
 check "/ is the Paseo app" bash -c "curl -fs '$base/' | grep -q '<div id=\"root\">'"
 check "index.html loads a hashed script" test -n "$script"
 check "the script is served" curl -fs -o /dev/null "$base$script"
+# Caddy 2.10.2 answered 206 Partial Content for compressed copies, with no
+# Range header in the request.
+check "compressed copies are a 200, not a 206" bash -c "headers -H 'Accept-Encoding: gzip' '$base$script' | grep -q '^http/1.1 200' && headers -H 'Accept-Encoding: br' '$base/' | grep -q '^http/1.1 200'"
 check "brotli copies are served" bash -c "headers -H 'Accept-Encoding: br' '$base$script' | grep -qx 'content-encoding: br'"
 check "gzip copies are served" bash -c "headers -H 'Accept-Encoding: gzip' '$base$script' | grep -qx 'content-encoding: gzip'"
 check "hashed files are cached for good" bash -c "headers '$base$script' | grep -qx 'cache-control: public, max-age=31536000, immutable'"
